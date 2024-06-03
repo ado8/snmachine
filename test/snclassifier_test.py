@@ -10,7 +10,7 @@ import numpy as np
 import pytest
 
 from astropy.table import Table
-from snmachine import example_data, sndata, snclassifier
+from snmachine import example_data, sndata, snclassifier, snfeatures
 
 # Path to the dataset
 test_data_path = os.path.join(example_data, 'SPCC_SUBSET', '')

@@ -23,7 +23,7 @@ import sklearn.ensemble  # requires a specific import
 
 from functools import partial
 from multiprocessing import Pool
-from scipy.integrate import trapz
+from scipy.integrate import trapezoid
 from sklearn import model_selection
 from sklearn.model_selection import PredefinedSplit, StratifiedKFold
 from sklearn.preprocessing import StandardScaler
@@ -156,7 +156,7 @@ def compute_roc_values(probs, y_test, which_column):
     tpr = np.array(tpr)[::-1]
 
     # Calculate the area under the ROC curve
-    auc = trapz(tpr, fpr)
+    auc = trapezoid(tpr, fpr)
 
     return fpr, tpr, auc
 
@@ -1050,7 +1050,9 @@ class SklearnClassifier(BaseClassifier):
                                                    param_grid=param_grid,
                                                    scoring=self.scoring, cv=cv)
 
-        grid_search.fit(X_train, y_train)  # this searches through the grid
+        grid_search.fit(X_train, np.array(y_train))  # this searches through the grid
+        # the np array seems to avoid a multiprocessing exception
+        # ValueError: cannot set WRITEABLE flag to True of this array
 
         # Save the grid search and update the saved classifier with the best
         # estimator obtained on the grid search
@@ -1583,7 +1585,9 @@ class LightGBMClassifier(BaseClassifier):
         grid_search = model_selection.GridSearchCV(self.classifier,
                                                    param_grid=param_grid,
                                                    scoring=self.scoring, cv=cv)
-        grid_search.fit(X_train, y_train)  # this searches through the grid
+        grid_search.fit(X_train, np.array(y_train))  # this searches through the grid
+        # the np array on y_train gets around a multiprocessing exception
+        # ValueError: cannot set WRITEABLE flag to True of this array
 
         # Save the grid search and update the saved classifier with the best
         # estimator obtained on the grid search

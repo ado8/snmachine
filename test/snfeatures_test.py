@@ -221,7 +221,6 @@ def test_tsne(load_full_testdata):
                    seed=42)
     plt.savefig('tsne_plot_test.png')
     assert os.path.getsize('tsne_plot_test.png') > 0
-    return fig
 
 
 def compute_gps(dataset, path_saved_gp_files):

@@ -81,5 +81,3 @@ def test_single_lightcurve_plot(load_example_lightcurve):
     plt.savefig('raw_lc_test.png')
 
     assert os.path.getsize('raw_lc_test.png') > 0
-
-    return fig
