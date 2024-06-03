@@ -1332,7 +1332,7 @@ class BoostDTClassifier(SklearnClassifier):
         base_estimators = [sklearn.tree.DecisionTreeClassifier(
             criterion='entropy',
             min_samples_leaf=leafs) for leafs in range(5, 55, 10)]
-        self.param_grid_default = {'base_estimator': base_estimators,
+        self.param_grid_default = {'estimator': base_estimators,
                                    'n_estimators': list(range(5, 85, 10))}
 
 
@@ -1377,9 +1377,9 @@ class BoostRFClassifier(SklearnClassifier):
         # This is a strange boosted random forest classifier that Max came up
         # that works quite well, but is likely biased in general
         base_estimators = [
-            sklearn.ensemble.RandomForestClassifier(400, 'entropy'),
-            sklearn.ensemble.RandomForestClassifier(600, 'entropy')]
-        self.param_grid_default = {'base_estimator': base_estimators,
+            sklearn.ensemble.RandomForestClassifier(400, criterion='entropy'),
+            sklearn.ensemble.RandomForestClassifier(600, criterion='entropy')]
+        self.param_grid_default = {'estimator': base_estimators,
                                    'n_estimators': list([2, 3, 5, 10])}
 
 

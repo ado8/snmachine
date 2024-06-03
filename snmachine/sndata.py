@@ -31,16 +31,23 @@ colours = {'sdssu': '#6614de', 'sdssg': '#007718', 'sdssr': '#b30100',
            'sdssi': '#d35c00', 'sdssz': 'k', 'desg': '#007718',
            'desr': '#b30100', 'desi': '#d35c00', 'desz': 'k',
            'lsstu': '#984ea3', 'lsstg': '#377eb8', 'lsstr': '#4daf4a',
-           'lssti': '#e3c530', 'lsstz': '#ff7f00', 'lssty': '#e41a1c'}
+           'lssti': '#e3c530', 'lsstz': '#ff7f00', 'lssty': '#e41a1c',
+           'X': '#007718', 'Y': '#b30100', # ZTF in YSE
+           }
 
 sntypes = {1: 'Ia', 2: 'II', 21: 'IIn', 22: 'IIP', 23: 'IIL',
            3: 'Ibc', 32: 'Ib', 33: 'Ic', 66: 'other'}
 
 markers = {'desg': '^', 'desr': 'o', 'desi': 's', 'desz': '*',
            'lsstu': 'o', 'lsstg': 'v', 'lsstr': '^',
-           'lssti': '<', 'lsstz': '>', 'lssty': 's'}
+           'lssti': '<', 'lsstz': '>', 'lssty': 's',
+           'X': '<', 'Y': '>',
+           }
+for key in 'griz':
+    colours[key] = colours['des'+key]
+    markers[key] = markers['des'+key]
 
-labels = {'desg': 'g', 'desr': 'r', 'desi': 'i', 'desz': 'z'}
+labels = {'desg': 'g', 'desr': 'r', 'desi': 'i', 'desz': 'z', 'X': 'g', 'Y': 'r'}
 
 # Default passband - central wavelength maps
 default_pb_wavelengths = {
